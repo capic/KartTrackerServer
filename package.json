@@ -15,6 +15,7 @@
     "serve-favicon": "~2.3.0",
     "config": "^1.15.0",
     "cors": "^2.7.1",
-    "sequelize": "~3.18.0"
+    "sequelize": "~3.18.0",
+    "mysql": "^2.10.2"
   }
 }
