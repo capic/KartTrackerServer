@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  models.Tracks.findAll().then(function(tracksModel) {
+  models.Track.findAll().then(function(tracksModel) {
     res.json(tracksModel);
   })
 });
