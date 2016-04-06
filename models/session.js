@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     start_time: DataTypes.TIME,
     end_time: DataTypes.TIME,
-    //track_id: DataTypes.INTEGER
+    track_id: DataTypes.INTEGER
   }, {
     freezeTableName: true,
     createdAt: false,
