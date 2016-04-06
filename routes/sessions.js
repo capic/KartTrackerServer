@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     {model: models.Track, as: 'track'}
   ];
 
-  models.Action.findAll({
+  models.Session.findAll({
     include: [
       {model: models.GpsData, as: 'gps_data'},
       {model: models.Track, as: 'track'}
