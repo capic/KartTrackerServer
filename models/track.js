@@ -8,12 +8,12 @@ module.exports = function(sequelize, DataTypes) {
     freezeTableName: true,
     createdAt: false,
     updatedAt: false,
-    tableName: 'track'
-    /*classMethods: {
+    tableName: 'track',
+    classMethods: {
       associate: function(models) {
-        Directory.hasMany(models.ActionHasProperties, {foreignKey: 'directory_id'});
+        Track.hasMany(models.Session, {foreignKey: 'track_id'});
       }
-    }*/
+    }
   });
 
   return Track;
