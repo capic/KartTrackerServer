@@ -3,6 +3,7 @@
     "host": "localhost",
     "database": "kart_tracker",
     "user": "root",
-    "password": "capic_20_04_1982"
+    "password": "capic_20_04_1982",
+    "dialect": "mysql"
   }
 }
