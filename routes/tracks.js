@@ -1,5 +1,6 @@
 var models = require('../models');
 var express = require('express');
+var utils = require('../common/utils')
 var router = express.Router();
 
 /* GET users listing. */
@@ -17,6 +18,12 @@ router.post('/', function(req, res, next) {
       res.json(trackModel);
     }
   );
+});
+
+router.post('/', function(req, res, next) {
+  var trackId = JSON.parse(JSON.stringify(req.body));
+
+  utils.executeAction("python /home/pi/KartTracker/main.py", [trackId]);
 });
 
 module.exports = router;
