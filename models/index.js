@@ -7,7 +7,13 @@ var Sequelize = require("sequelize");
 var env       = process.env.NODE_ENV || "development";
 var config    = require("../configuration");
 var dbConfig  = config.get('db');
-var sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {host: dbConfig.host, dialect: dbConfig.dialect});
+
+if (dbConfig.dialect == "sqlite") {
+  var sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {host: dbConfig.host, dialect: dbConfig.dialect, storage: dbConfig.storage});
+} else {
+  var sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {host: dbConfig.host, dialect: dbConfig.dialect});
+}
+
 var db        = {};
 
 fs

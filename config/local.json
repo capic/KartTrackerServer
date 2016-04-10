@@ -4,6 +4,7 @@
     "database": "kart_tracker",
     "user": "root",
     "password": "capic_20_04_1982",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "storage": "/home/pi/KartTracker/karttracker.db"
   }
 }
