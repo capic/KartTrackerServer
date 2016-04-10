@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.post('/execute', function(req, res, next) {
-  var trackId = JSON.parse(JSON.stringify(req.body));
+  var trackId = JSON.parse(JSON.stringify(req.body)).id;
 console.log(trackId);
   utils.executeAction("main.py", [trackId]);
 });
