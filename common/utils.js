@@ -8,6 +8,7 @@ var utils = {};
 utils.executeAction = function (action, parametersList) {
     var options = {
         mode: 'text',
+        pythonOptions: ['-u'],
         scriptPath: "/home/pi/KartTracker/",
         args: ['1']
     };
