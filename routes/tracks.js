@@ -26,6 +26,8 @@ router.post('/execute', function(req, res, next) {
   var params = new Array();
   params.push(trackId)
   utils.executeAction("main.py", params);
+
+  res.send();
 });
 
 module.exports = router;
