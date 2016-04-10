@@ -6,10 +6,9 @@ var PythonShell = require('python-shell');
 var utils = {};
 
 utils.executeAction = function (action, parametersList) {
-    console.log("parameters " + parametersList);
     var options = {
         scriptPath: "/home/pi/KartTracker/",
-        args: parametersList
+        args: [1]
     };
 
     PythonShell.run(action, options, function (err, results) {
