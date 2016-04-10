@@ -10,7 +10,7 @@ utils.executeAction = function (action, parametersList) {
         mode: 'text',
         pythonOptions: ['-u'],
         scriptPath: "/home/pi/KartTracker/",
-        args: ['1']
+        args: ['value1', 'value2', 'value3']
     };
 
     PythonShell.run(action, options, function (err, results) {
