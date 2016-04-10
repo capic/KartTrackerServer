@@ -22,8 +22,10 @@ router.post('/', function(req, res, next) {
 
 router.post('/execute', function(req, res, next) {
   var trackId = JSON.parse(JSON.stringify(req.body)).id;
-console.log(trackId);
-  utils.executeAction("main.py", [trackId]);
+
+  var params = new Array();
+  params.push(trackId)
+  utils.executeAction("main.py", params);
 });
 
 module.exports = router;
