@@ -9,7 +9,7 @@ utils.executeAction = function (action, parametersList) {
     var options = {
         mode: 'text',
         scriptPath: "/home/pi/KartTracker/",
-        args: parametersList
+        args: 1
     };
 
     PythonShell.run(action, options, function (err, results) {
