@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
 router.post('/execute', function(req, res, next) {
   var trackId = JSON.parse(JSON.stringify(req.body));
 
-  utils.executeAction("/home/pi/KartTracker/main.py", [trackId]);
+  utils.executeAction("main.py", [trackId]);
 });
 
 module.exports = router;
