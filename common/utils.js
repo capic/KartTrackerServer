@@ -1,33 +1,21 @@
 /**
  * Created by Vincent on 13/11/2015.
  */
-var spawn = require('child_process').spawn;
+var PythonShell = require('python-shell');
 
 var utils = {};
 
 utils.executeAction = function (action, parametersList) {
-    try {
-        var execAction = spawn(action, parametersList);
 
-        execAction.stdout.on('data',
-            function (data) {
-                console.log(data.toString());
-            }
-        );
-        execAction.stderr.on('data',
-            function (data) {
-                console.log(data.toString());
-            }
-        );
-        execAction.on('error', function (err) {
-            //console.log('Failed to start child process.' + err);
-        });
-        execAction.on('close', function (code) {
-            //console.log('child process exited with code ' + code);
-        });
-    } catch (ex) {
-        console.log(ex);
-    }
+    var options = {
+        args: parametersList
+    };
+
+    PythonShell.run(action, options, function (err, results) {
+        if (err) throw err;
+        // results is an array consisting of messages collected during execution
+        console.log('results: %j', results);
+    });
 };
 
 module.exports = utils;
