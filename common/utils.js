@@ -8,7 +8,7 @@ var utils = {};
 utils.executeAction = function (action, parametersList) {
     var options = {
         scriptPath: "/home/pi/KartTracker/",
-        args: [1]
+        args: ['1']
     };
 
     PythonShell.run(action, options, function (err, results) {
