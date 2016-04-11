@@ -26,17 +26,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var sessionsList = JSON.parse(JSON.stringify(req.body));
+  if (req.body.hasOwnProperty('datas')) {
+    var sessionsList = JSON.parse(req.body.datas);
 
-  console.log(sessionsList);
-
-  sessionsList.forEach(function(session){
-    models.Session.create(session,{
-      include: [
-        {model: models.GpsData, as: 'gps_data'}
-      ]
-    })
-  });
+    sessionsList.forEach(function(session) {
+      models.Session.create(session, {
+        include: [
+          {model: models.GpsData, as: 'gps_data'}
+        ]
+      });
+    });
+  }
 });
 
 module.exports = router;
