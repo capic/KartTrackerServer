@@ -28,6 +28,8 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var sessionsList = JSON.parse(JSON.stringify(req.body));
 
+  console.log(sessionsList);
+
   sessionsList.forEach(function(session){
     models.Session.create(session,{
       include: [
