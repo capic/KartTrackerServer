@@ -30,12 +30,14 @@ router.post('/', function(req, res, next) {
     var sessionsList = JSON.parse(req.body.datas);
 
     sessionsList.forEach(function(session) {
+      console.log(session);
       models.Session.create(session, {
         include: [
           {model: models.GpsData, as: 'gps_data'}
         ]
       });
     });
+    res.end();
   }
 });
 
