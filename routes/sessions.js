@@ -9,13 +9,13 @@ router.get('/', function(req, res, next) {
   };
 
   var relationsList = [
-    {model: models.GpsData, as: 'gps_data'},
+    {model: models.GpsData, as: 'gps_datas'},
     {model: models.Track, as: 'track'}
   ];
 
   models.Session.findAll({
     include: [
-      {model: models.GpsData, as: 'gps_data'},
+      {model: models.GpsData, as: 'gps_datas'},
       {model: models.Track, as: 'track'}
     ]}).then(callback)
       .catch(
@@ -33,7 +33,7 @@ router.post('/', function(req, res, next) {
       console.log(session);
       models.Session.create(session, {
         include: [
-          {model: models.GpsData, as: 'gps_data'}
+          {model: models.GpsData, as: 'gps_datas'}
         ]
       });
     });
