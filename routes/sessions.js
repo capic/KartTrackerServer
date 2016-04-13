@@ -47,6 +47,7 @@ router.post('/', function (req, res, next) {
             replacements: {idsList: sessionIdsList},
             type: models.sequelize.QueryTypes.SELECT
         }).then(function(list) {
+            console.log(list);
             res.json(list);
         })
     }
