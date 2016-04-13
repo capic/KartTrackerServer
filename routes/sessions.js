@@ -43,7 +43,7 @@ router.post('/', function (req, res, next) {
             })
         });
 
-        models.sequelize.query("SELECT id FROM session WHERE id in :idsList", {
+        models.sequelize.query("SELECT id FROM session WHERE id in [:idsList]", {
             replacements: {idsList: sessionIdsList},
             type: models.sequelize.QueryTypes.SELECT
         }).then(function(list) {
