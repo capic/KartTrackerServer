@@ -31,35 +31,30 @@ router.post('/list', function(req, res, next) {
         var sessionsList = JSON.parse(req.body.datas);
         var sessionIdsList = [];
 
-        models.sequelize.transaction(function (t) {
-            var promises = [];
+        sessionsList.forEach(function (session) {
+            // on sauvegarde l'id de la session pour savoir quelles sessions viennent d'être insérer pour vérifier que tout
+            // à bien été correctement traité en base
+            sessionIdsList.push(session.id);
 
-            sessionsList.forEach(function (session) {
-                // on sauvegarde l'id de la session pour savoir quelles sessions viennent d'être insérer pour vérifier que tout
-                // à bien été correctement traité en base
-                sessionIdsList.push(session.id);
-
-                var newPromise = models.Session.create(session, {
-                    include: [
-                        {model: models.GpsData, as: 'gps_datas'}
-                    ]
-                });
-                promises.push(newPromise);
+            var newPromise = models.Session.create(session, {
+                include: [
+                    {model: models.GpsData, as: 'gps_datas'}
+                ]
             });
-
-            return Promise.all(promises).then(function(sessions) {
-                res.json(sessions);
-            });
-
-            //models.sequelize.query("SELECT id FROM session WHERE id in (:idsList)", {
-            //    replacements: {idsList: sessionIdsList},
-            //    type: models.sequelize.QueryTypes.SELECT
-            //}).then(function(list) {
-            //    console.log(list);
-            //    res.json(list);
-            //});
-
+            promises.push(newPromise);
         });
+
+        Promise.all(promises).then(function(sessions) {
+            res.json(sessions);
+        });
+
+        //models.sequelize.query("SELECT id FROM session WHERE id in (:idsList)", {
+        //    replacements: {idsList: sessionIdsList},
+        //    type: models.sequelize.QueryTypes.SELECT
+        //}).then(function(list) {
+        //    console.log(list);
+        //    res.json(list);
+        //});
     }
 });
 
