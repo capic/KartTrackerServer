@@ -29,15 +29,14 @@ router.get('/', function (req, res, next) {
 router.post('/list', function(req, res, next) {
     if (req.body.hasOwnProperty('datas')) {
         var sessionsList = JSON.parse(req.body.datas);
-        var sessionIdsList = [];
 
         var promises = [];
         sessionsList.forEach(function (session) {
-            var newPromise = models.Session.findOrCreate({where: {id: session.id}, defaults: session}/*, {
+            var newPromise = models.Session.findOrCreate({where: {id: session.id}, defaults: session}, {
                 include: [
                     {model: models.GpsData, as: 'gps_datas'}
                 ]
-            }*/);
+            });
             promises.push(newPromise);
         });
 
