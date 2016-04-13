@@ -35,12 +35,13 @@ router.post('/', function (req, res, next) {
             // on sauvegarde l'id de la session pour savoir quelles sessions viennent d'être insérer pour vérifier que tout
             // à bien été correctement traité en base
             sessionIdsList.push(session.id);
-
+/*
             models.Session.create(session, {
                 include: [
                     {model: models.GpsData, as: 'gps_datas'}
                 ]
             })
+*/
         });
 
         models.sequelize.query("SELECT id FROM session WHERE id in (:idsList)", {

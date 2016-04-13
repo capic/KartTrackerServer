@@ -11,7 +11,7 @@ var dbConfig  = config.get('db');
 if (dbConfig.dialect == "sqlite") {
   var sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {host: dbConfig.host, dialect: dbConfig.dialect, storage: dbConfig.storage});
 } else {
-  var sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {host: dbConfig.host, dialect: dbConfig.dialect, logging: false});
+  var sequelize = new Sequelize(dbConfig.database, dbConfig.user, dbConfig.password, {host: dbConfig.host, dialect: dbConfig.dialect, logging: true});
 }
 
 var db        = {};
