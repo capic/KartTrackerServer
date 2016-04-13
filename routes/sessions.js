@@ -33,11 +33,7 @@ router.post('/list', function(req, res, next) {
 
         var promises = [];
         sessionsList.forEach(function (session) {
-            // on sauvegarde l'id de la session pour savoir quelles sessions viennent d'être insérer pour vérifier que tout
-            // à bien été correctement traité en base
-            sessionIdsList.push(session.id);
-
-            var newPromise = models.Session.create(session, {
+            var newPromise = models.Session.findOrCreate(session, {
                 include: [
                     {model: models.GpsData, as: 'gps_datas'}
                 ]

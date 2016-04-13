@@ -25,19 +25,14 @@ router.post('/list', function (req, res, next) {
     var tracksList = JSON.parse(req.body.datas);
     var trackIdsList = [];
 
+    var promises = [];
     tracksList.forEach(function (track) {
-      // on sauvegarde l'id du track pour savoir quelles track viennent d'être insérer pour vérifier que tout
-      // à bien été correctement traité en base
-      trackIdsList.push(track.id);
-
-      models.Track.create(track);
+      var newPromise = models.Track.findOrCreate(track);
+      promises.push(newPromise);
     });
 
-    models.sequelize.query("SELECT id FROM track WHERE id in (:idsList)", {
-      replacements: {idsList: trackIdsList},
-      type: models.sequelize.QueryTypes.SELECT
-    }).then(function(list) {
-      res.json(list);
+    Promise.all(promises).then(function(tracks) {
+      res.json(tracks);
     });
   }
 });
