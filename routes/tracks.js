@@ -20,6 +20,28 @@ router.post('/', function(req, res, next) {
   );
 });
 
+router.post('/list', function (req, res, next) {
+  if (req.body.hasOwnProperty('datas')) {
+    var tracksList = JSON.parse(req.body.datas);
+    var trackIdsList = [];
+
+    tracksList.forEach(function (track) {
+      // on sauvegarde l'id du track pour savoir quelles track viennent d'être insérer pour vérifier que tout
+      // à bien été correctement traité en base
+      trackIdsList.push(track.id);
+
+      models.Track.create(track);
+    });
+
+    models.sequelize.query("SELECT id FROM track WHERE id in (:idsList)", {
+      replacements: {idsList: trackIdsList},
+      type: models.sequelize.QueryTypes.SELECT
+    }).then(function(list) {
+      res.json(list);
+    });
+  }
+});
+
 router.post('/execute', function(req, res, next) {
   var trackId = JSON.parse(JSON.stringify(req.body)).id;
 

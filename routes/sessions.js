@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
         );
 });
 
-router.post('/', function (req, res, next) {
+router.post('/list', function(req, res, next) {
     if (req.body.hasOwnProperty('datas')) {
         var sessionsList = JSON.parse(req.body.datas);
         var sessionIdsList = [];
@@ -36,11 +36,11 @@ router.post('/', function (req, res, next) {
             // à bien été correctement traité en base
             sessionIdsList.push(session.id);
 
-            //models.Session.create(session, {
-            //    include: [
-             //       {model: models.GpsData, as: 'gps_datas'}
-             //   ]
-            //})
+            models.Session.create(session, {
+                include: [
+                    {model: models.GpsData, as: 'gps_datas'}
+                ]
+            });
         });
 
         models.sequelize.query("SELECT id FROM session WHERE id in (:idsList)", {
@@ -49,7 +49,7 @@ router.post('/', function (req, res, next) {
         }).then(function(list) {
             console.log(list);
             res.json(list);
-        })
+        });
     }
 });
 
