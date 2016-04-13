@@ -33,11 +33,11 @@ router.post('/list', function(req, res, next) {
 
         var promises = [];
         sessionsList.forEach(function (session) {
-            var newPromise = models.Session.findOrCreate({where: {id: session.id}, defaults: session}, {
+            var newPromise = models.Session.findOrCreate({where: {id: session.id}, defaults: session}/*, {
                 include: [
                     {model: models.GpsData, as: 'gps_datas'}
                 ]
-            });
+            }*/);
             promises.push(newPromise);
         });
 
