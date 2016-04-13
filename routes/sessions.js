@@ -31,6 +31,7 @@ router.post('/list', function(req, res, next) {
         var sessionsList = JSON.parse(req.body.datas);
         var sessionIdsList = [];
 
+        var promises = [];
         sessionsList.forEach(function (session) {
             // on sauvegarde l'id de la session pour savoir quelles sessions viennent d'être insérer pour vérifier que tout
             // à bien été correctement traité en base
