@@ -28,7 +28,7 @@ router.post('/list', function (req, res, next) {
 
     var promises = [];
     tracksList.forEach(function (track) {
-      var newPromise = models.Track.findOrCreate(track);
+      var newPromise = models.Track.findOrCreate({where: {id: track.id}, defaults: track});
       promises.push(newPromise);
     });
 
