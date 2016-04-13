@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   var track = JSON.parse(JSON.stringify(req.body));
+  track.new = true;
 
   models.Track.create(track)
     .then(function(trackModel) {
