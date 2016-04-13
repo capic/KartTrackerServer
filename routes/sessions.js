@@ -36,11 +36,11 @@ router.post('/', function (req, res, next) {
             // à bien été correctement traité en base
             sessionIdsList.push(session.id);
 
-            models.Session.create(session, {
-                include: [
-                    {model: models.GpsData, as: 'gps_datas'}
-                ]
-            })
+            //models.Session.create(session, {
+            //    include: [
+             //       {model: models.GpsData, as: 'gps_datas'}
+             //   ]
+            //})
         });
 
         models.sequelize.query("SELECT id FROM session WHERE id in (:idsList)", {
