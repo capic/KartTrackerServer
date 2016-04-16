@@ -42,7 +42,8 @@ router.post('/execute', function(req, res, next) {
   var trackId = JSON.parse(JSON.stringify(req.body)).id;
 
   var params = new Array();
-  params.push(trackId)
+  params.push("-p '/home/pi/KartTracker/'");
+  params.push(trackId);
   utils.executeAction("main.py", params);
 
   res.send();
