@@ -3,6 +3,8 @@ var express = require('express');
 var utils = require('../common/utils')
 var router = express.Router();
 
+var pyshell = null;
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   models.Track.findAll().then(function(tracksModel) {
@@ -42,9 +44,13 @@ router.post('/execute', function(req, res, next) {
   var trackId = JSON.parse(JSON.stringify(req.body)).id;
 
   var params = [trackId];
-  utils.executeAction("main.py", params);
+  pyshell = utils.executeAction("main.py", params);
 
   res.send();
+});
+
+router.post('/stop', function(req, res, next) {
+  utils.endAction(pyshell);
 });
 
 module.exports = router;

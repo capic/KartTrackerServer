@@ -12,10 +12,15 @@ utils.executeAction = function (action, parametersList) {
         args: parametersList
     };
 
-    PythonShell.run(action, options, function (err, results) {
+    var pyshell = new PythonShell(action, options);
+
+    return pyshell;
+};
+
+utils.endAction = function(pyshell) {
+    pyshell.end(function (err) {
         if (err) throw err;
-        // results is an array consisting of messages collected during execution
-        console.log('results: %j', results);
+        console.log('finished');
     });
 };
 
