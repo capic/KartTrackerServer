@@ -51,6 +51,7 @@ router.post('/execute', function(req, res, next) {
 
 router.post('/stop', function(req, res, next) {
   utils.endAction(pyshell);
+  res.send();
 });
 
 module.exports = router;
