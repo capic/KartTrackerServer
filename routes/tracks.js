@@ -21,7 +21,7 @@ router.get('/withInfos', function(res, res, next) {
 
     console.log(today);
     trackModelList.forEach(function(track) {
-      var promise = models.Session.count({where: {track_id: track.id, date_session: new Date(today.getFullYear(), today.getMonth(), today.getDate())}}).then(function(result) {
+      var promise = models.Session.count({where: {track_id: track.id, date_session: new Date(today.getFullYear(), today.getMonth(), today.getDate()).toISOString()}}).then(function(result) {
         track.dataValues.sessions_count = result;
 
         tracksListReturned.push(track);
