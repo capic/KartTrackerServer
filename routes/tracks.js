@@ -19,7 +19,7 @@ router.get('/withInfos', function(res, res, next) {
     var d = new Date();
     var today = new Date(d.getFullYear(), d.getMonth(), d.getDate());
     trackModelList.forEach(function(track) {
-      var promise = models.Session.count({where: {track_id: track.id, date_session: sequelize.fn('date_format', new Date(), '%Y-%m-%d')}}).then(function(result) {
+      var promise = models.Session.count({where: {track_id: track.id, date_session: models.sequelize.fn('date_format', new Date(), '%Y-%m-%d')}}).then(function(result) {
         track.dataValues.sessions_count = result;
 
         tracksListReturned.push(track);
