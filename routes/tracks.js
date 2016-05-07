@@ -18,9 +18,11 @@ router.get('/withInfos', function(res, res, next) {
     var tracksListReturned = [];
     trackModelList.forEach(function(track) {
       var promise = models.Session.count({where: {track_id: track.id}}).then(function(result) {
-        track.sessions_count = result;
+        var trackModified = track;
+        trackModified.sessions_count = result;
+
         tracksListReturned.push(track);
-        console.log(track);
+        console.log(trackModified);
       });
 
       promises.push(promise);
