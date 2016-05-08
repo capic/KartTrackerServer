@@ -35,6 +35,7 @@ router.get('/withInfos', function(res, res, next) {
       promises.push(promise);
     });
 
+    console.log("num : " + promises.length)
     Promise.all(promises).then(function() {
       res.json(tracksListReturned);
     });
