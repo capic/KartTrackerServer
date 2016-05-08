@@ -26,6 +26,14 @@ router.get('/', function (req, res, next) {
         );
 });
 
+router.get('/current', function(req, res, next) {
+    models.Session.findOne({where: {end_time: null}})
+        .then(function(session) {
+            res.json(session);
+        }
+    );
+});
+
 router.post('/list', function(req, res, next) {
     if (req.body.hasOwnProperty('datas')) {
         var sessionsList = JSON.parse(req.body.datas);
