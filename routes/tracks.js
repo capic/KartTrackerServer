@@ -39,10 +39,10 @@ router.get('/withInfos', function(res, res, next) {
 
   models.Track.findAll(
       {include:
-          [{
+          [/*{
             model: models.Session,
             attributes: [[models.sequelize.fn('COUNT', 'id'), 'items']]
-          },
+          },*/
           {
             model: models.Session,
             attributes: [[models.sequelize.fn('COUNT', 'name'), 'items2']],
