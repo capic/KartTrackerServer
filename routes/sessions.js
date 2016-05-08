@@ -26,10 +26,10 @@ router.get('/', function (req, res, next) {
         );
 });
 
-router.get('/current/:trackId', function(req, res, next) {
-    models.Session.findOne({where: {end_time: null, track_id: req.params.trackId}})
-        .then(function(session) {
-            res.json(session);
+router.get('/currentList/', function(req, res, next) {
+    models.Session.findAll({where: {end_time: null}})
+        .then(function(sessionsList) {
+            res.json(sessionsList);
         }
     );
 });
