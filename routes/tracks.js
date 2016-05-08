@@ -20,13 +20,19 @@ router.get('/withInfos', function(res, res, next) {
     var today = new Date();
 
     trackModelList.forEach(function(track) {
-      var promise = models.Session.count({where: {track_id: track.id, date_session: models.sequelize.fn('date', "now") }}).then(function(result) {
-        track.dataValues.sessions_count = result;
+      models.Session.count({where: {track_id: track.id, date_session: models.sequelize.fn('date', "now") }}).then(function(result) {
+        track.dataValues.sessions_count_today = result;
 
-        tracksListReturned.push(track);
+        var promise = models.Session.count({where: {track_id: track.id}}).then(function(result) {
+          track.dataValues.sessions_count_total = result;
+
+          tracksListReturned.push(track);
+        });
+
+        promises.push(promise);
       });
 
-      promises.push(promise);
+
 
       Promise.all(promises).then(function() {
         res.json(tracksListReturned);
