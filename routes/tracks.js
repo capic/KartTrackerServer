@@ -23,6 +23,10 @@ router.get('/withInfos', function(res, res, next) {
             attributes: [[models.sequelize.fn('COUNT', 'id'), 'sessions_count_today']],
             where: {date_session: models.sequelize.fn('date', "now")},
             required: false
+          }, {
+            model: models.Session,
+            where: {end_time: null},
+            required: false
           }]
       }
   ).then(function(trackModelList) {
