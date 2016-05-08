@@ -25,6 +25,7 @@ router.get('/withInfos', function(res, res, next) {
 
         var promise = models.Session.count({where: {track_id: track.id}}).then(function(result) {
           track.dataValues.sessions_count_total = result;
+          console.log("push track");
           tracksListReturned.push(track);
         });
         console.log("promise 2")
