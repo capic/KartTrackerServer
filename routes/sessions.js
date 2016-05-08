@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
         );
 });
 
-router.get('/currentList/', function(req, res, next) {
+router.get('/currentList', function(req, res, next) {
     models.Session.findAll({where: {end_time: null}})
         .then(function(sessionsList) {
             res.json(sessionsList);
