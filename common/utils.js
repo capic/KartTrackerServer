@@ -14,6 +14,13 @@ utils.executeAction = function (action, parametersList) {
 
     var pyshell = new PythonShell(action, options);
 
+    pyshell.on('message', function (message) {
+        console.log(message);
+    });
+
+    pyshell.on('error', function (error) {
+        console.log(error);
+    });
     return pyshell;
 };
 
