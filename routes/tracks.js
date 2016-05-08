@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/withInfos', function(res, res, next) {
+  /*
   var promises = [];
   models.Track.findAll().then(function(trackModelList) {
     var tracksListReturned = [];
@@ -22,23 +23,29 @@ router.get('/withInfos', function(res, res, next) {
     trackModelList.forEach(function(track) {
       var promise = models.Session.count({where: {track_id: track.id, date_session: models.sequelize.fn('date', "now") }}).then(function(result) {
         track.dataValues.sessions_count_today = result;
-
-        var promise = models.Session.count({where: {track_id: track.id}}).then(function(result) {
-          track.dataValues.sessions_count_total = result;
-          console.log("push track");
-          tracksListReturned.push(track);
-        });
-        console.log("promise 2")
-        promises.push(promise);
       });
-      console.log("promise 1")
+      promises.push(promise);
+      var promise = models.Session.count({where: {track_id: track.id}}).then(function(result) {
+        track.dataValues.sessions_count_total = result;
+      });
       promises.push(promise);
     });
 
-    console.log("num : " + promises.length)
     Promise.all(promises).then(function() {
       res.json(tracksListReturned);
     });
+  });
+  */
+
+  models.Track.findAll(
+      {include:
+          [{
+            model: models.Session,
+            attributes: [[models.sequelize.fn('COUNT', 'id'), 'items']]
+          }]
+      }
+  ).then(function(trackModelList) {
+    res.json(trackModelList);
   });
 });
 
