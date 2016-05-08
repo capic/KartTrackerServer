@@ -45,7 +45,7 @@ router.get('/withInfos', function(res, res, next) {
           },
           {
             model: models.Session,
-            attributes: [[models.sequelize.fn('COUNT', 'id'), 'items2']],
+            attributes: [[models.sequelize.fn('COUNT', 'name'), 'items2']],
             where: {date_session: models.sequelize.fn('date', "now")}
           }]
       }
