@@ -27,10 +27,10 @@ router.get('/withInfos', function(res, res, next) {
           track.dataValues.sessions_count_total = result;
           tracksListReturned.push(track);
         });
-
+        console.log("promise 2")
         promises.push(promise);
       });
-
+      console.log("promise 1")
       promises.push(promise);
     });
 
