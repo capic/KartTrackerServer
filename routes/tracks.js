@@ -37,10 +37,28 @@ router.get('/withInfos', function(res, res, next) {
   });
   */
 
-  models.Track.findAll({
-      attributes: [[models.sequelize.fn('COUNT', 'name'), 'items']]
-  }).then(function(trackModelList) {
-    res.json(trackModelList);
+  var tracksListReturned = [];
+  var promises = [];
+  models.Track.findAll(
+      {include:
+          [{
+            model: models.Session,
+            attributes: [[models.sequelize.fn('COUNT', 'id'), 'items2']],
+            where: {date_session: models.sequelize.fn('date', "now")}
+          }]
+      }
+  ).then(function(trackModelList) {
+    trackModelList.forEach(function(track) {
+      var promise = models.Session.count({where: {track_id: track.id}}).then(function(result) {
+        track.dataValues.sessions_count_total = result;
+        tracksListReturned.push(track)
+      });
+      promises.push(promise);
+    });
+
+    Promise.all(promises).then(function() {
+      res.json(tracksListReturned);
+    });
   });
 });
 
