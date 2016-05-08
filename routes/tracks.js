@@ -45,9 +45,8 @@ router.get('/withInfos', function(res, res, next) {
           },
           {
             model: models.Session,
-            attributes: [[models.sequelize.fn('COUNT', 'id'), 'items']],
-            where: {date_session: models.sequelize.fn('date', "now")},
-            as: 'sess'
+            attributes: [[models.sequelize.fn('COUNT', 'id'), 'items2']],
+            where: {date_session: models.sequelize.fn('date', "now")}
           }]
       }
   ).then(function(trackModelList) {
