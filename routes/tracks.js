@@ -1,6 +1,6 @@
 var models = require('../models');
 var express = require('express');
-var utils = require('../common/utils')
+var utils = require('../common/utils');
 var router = express.Router();
 
 var pyshell = null;
