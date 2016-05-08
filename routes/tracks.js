@@ -2,7 +2,7 @@ var models = require('../models');
 var express = require('express');
 var utils = require('../common/utils')
 var router = express.Router();
-var dateFormat = require('dateformat');
+var moment = require('moment');
 
 var pyshell = null;
 
@@ -20,7 +20,7 @@ router.get('/withInfos', function(res, res, next) {
     var today = new Date();
 
     trackModelList.forEach(function(track) {
-      var promise = models.Session.count({where: {track_id: track.id, date_session: today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate()}}).then(function(result) {
+      var promise = models.Session.count({where: {track_id: track.id, date_session: moment(new Date(), "YYYY-DD-MM")}}).then(function(result) {
         track.dataValues.sessions_count = result;
 
         tracksListReturned.push(track);
