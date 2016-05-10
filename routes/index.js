@@ -13,6 +13,14 @@ router.post('/synchronise', function(req, res, next) {
   var params = ['-s'];
   pyshell = utils.executeAction("main.py", params);
 
+  pyshell.on('message', function (message) {
+    console.log(message);
+  });
+
+  pyshell.on('error', function (error) {
+    console.log(error);
+  });
+
   res.end();
 });
 

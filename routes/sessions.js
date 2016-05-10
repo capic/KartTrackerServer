@@ -42,7 +42,8 @@ router.post('/list', function(req, res, next) {
         sessionsList.forEach(function (session) {
             var newPromise = models.Session.create(session, {
                 include: [
-                    {model: models.GpsData, as: 'gps_datas'}
+                    {model: models.GpsData, as: 'gps_datas'},
+                    {model: models.AccelerometerData, as: 'accelerometer_datas'}
                 ]
             });
             promises.push(newPromise);

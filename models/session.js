@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Session.belongsTo(models.Track, {foreignKey: 'track_id', as: 'track'});
         Session.hasMany(models.GpsData, {foreignKey: 'session_id', as: 'gps_datas'});
+        Session.hasMany(models.AccelerometerData, {foreignKey: 'session_id', as: 'accelerometer_datas'});
       }
     }
   });
