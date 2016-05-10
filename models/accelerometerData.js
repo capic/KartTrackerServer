@@ -2,7 +2,7 @@
  * Created by Vincent on 27/08/2015.
  */
 module.exports = function(sequelize, DataTypes) {
-  var GpsData = sequelize.define('GpsData', {
+  var AccelerometerData = sequelize.define('AccelerometerData', {
     gyroscope_x: DataTypes.FLOAT,
     gyroscope_y: DataTypes.FLOAT,
     gyroscope_z: DataTypes.FLOAT,
@@ -16,13 +16,13 @@ module.exports = function(sequelize, DataTypes) {
     freezeTableName: true,
     createdAt: false,
     updatedAt: false,
-    tableName: 'gps_data',
+    tableName: 'accelerometer_data',
     classMethods: {
       associate: function(models) {
-        GpsData.belongsTo(models.Session, {foreignKey: 'session_id', as: 'session'});
+        AccelerometerData.belongsTo(models.Session, {foreignKey: 'session_id', as: 'session'});
       }
     }
   });
 
-  return GpsData;
+  return AccelerometerData;
 };
