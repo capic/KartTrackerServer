@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     latitude: DataTypes.FLOAT,
     longitude: DataTypes.FLOAT,
     speed: DataTypes.FLOAT,
-    date_time: DataTypes.DATE(3),
+    date_time: DataTypes.DATE(6),
     //session_id: DataTypes.INTEGER
   }, {
     freezeTableName: true,

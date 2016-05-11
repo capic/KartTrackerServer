@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     accelerometer_z: DataTypes.FLOAT,
     rotation_x: DataTypes.FLOAT,
     rotation_y: DataTypes.FLOAT,
-    date_time: DataTypes.DATE(3),
+    date_time: DataTypes.DATE(6),
   }, {
     freezeTableName: true,
     createdAt: false,
