@@ -10,6 +10,7 @@ router.get('/', function (req, res, next) {
 
     var relationsList = [
         {model: models.GpsData, as: 'gps_datas'},
+        {model: models.AccelerometerData, as: 'accelerometer_datas'},
         {model: models.Track, as: 'track'}
     ];
 
