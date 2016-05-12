@@ -17,6 +17,7 @@ router.get('/', function (req, res, next) {
     models.Session.findAll({
         include: [
             {model: models.GpsData, as: 'gps_datas'},
+            {model: models.AccelerometerData, as: 'accelerometer_datas'},
             {model: models.Track, as: 'track'}
         ]
     }).then(callback)
