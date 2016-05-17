@@ -7,7 +7,10 @@ var pyshell = null;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  models.Track.findAll().then(function(tracksModel) {
+  var relationsList = [];
+  var queryOptions = utils.urlFiltersParametersTreatment(req.query, relationsList);
+
+  models.Track.findAll(queryOptions).then(function(tracksModel) {
     res.json(tracksModel);
   })
 });
