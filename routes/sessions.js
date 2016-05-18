@@ -14,13 +14,9 @@ router.get('/', function (req, res, next) {
         {model: models.Track, as: 'track'}
     ];
 
-    models.Session.findAll({
-        include: [
-            {model: models.GpsData, as: 'gps_datas'},
-            {model: models.AccelerometerData, as: 'accelerometer_datas'},
-            {model: models.Track, as: 'track'}
-        ]
-    }).then(callback)
+    var queryOptions = utils.urlFiltersParametersTreatment(req.query, relationsList);
+
+    models.Session.findAll(queryOptions).then(callback)
         .catch(
             function (errors) {
                 console.log(errors);
