@@ -3,8 +3,23 @@ var express = require('express');
 var router = express.Router();
 var utils = require('../common/utils');
 
-/* GET users listing. */
 router.get('/', function (req, res, next) {
+    var callback = function (action) {
+        res.json(action);
+    };
+
+    var queryOptions = utils.urlFiltersParametersTreatment(req.query, []);
+
+    models.Session.findAll(queryOptions).then(callback)
+        .catch(
+            function (errors) {
+                console.log(errors);
+            }
+        );
+});
+
+/* GET users listing. */
+router.get('/withInfos', function (req, res, next) {
     var callback = function (action) {
         res.json(action);
     };
