@@ -9,6 +9,7 @@ var pyshell = null;
 router.get('/', function (req, res, next) {
     var relationsList = [];
     var queryOptions = utils.urlFiltersParametersTreatment(req.query, relationsList);
+    queryOptions.order = ['name', 'ASC'];
 
     models.Track.findAll(queryOptions).then(function (tracksModel) {
         res.json(tracksModel);
