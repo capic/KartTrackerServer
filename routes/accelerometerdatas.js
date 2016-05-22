@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 
     var queryOptions = utils.urlFiltersParametersTreatment(req.query, []);
 
-    models.AccelerometerData.findAll(queryOptions).then(callback)
+    models.AccelerometerData.findAndCountAll(queryOptions).then(callback)
         .catch(
             function (errors) {
                 console.log(errors);
