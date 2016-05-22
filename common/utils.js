@@ -56,6 +56,8 @@ var sequelizeParameterTreatment = function(prop, queryParameters, queryOptions) 
         queryOptions['limit'] = parseInt(queryParameters[prop], 10);
     } else if (prop == "_offset") {
         queryOptions['offset'] = parseInt(queryParameters[prop], 10);
+    } else if (prop == "_order") {
+        queryOptions['order'] = queryParameters[prop];
     }
 };
 

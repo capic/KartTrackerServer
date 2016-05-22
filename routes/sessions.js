@@ -20,8 +20,8 @@ router.get('/', function (req, res, next) {
 
 /* GET users listing. */
 router.get('/withInfos', function (req, res, next) {
-    var callback = function (action) {
-        res.json(action);
+    var callback = function (sessions) {
+        res.json(sessions);
     };
 
     var relationsList = [
@@ -38,6 +38,18 @@ router.get('/withInfos', function (req, res, next) {
                 console.log(errors);
             }
         );
+});
+
+router.get('/:id/withInfos', function (req, res, next) {
+    models.Session.findById(req.params.id, {
+        include: [
+            {model: models.GpsData, as: 'gps_datas'},
+            {model: models.AccelerometerData, as: 'accelerometer_datas'}
+        ]
+    }).then(function (sessionModel) {
+            res.json(sessionModel);
+        }
+    );
 });
 
 router.get('/currentList', function(req, res, next) {
