@@ -61,7 +61,7 @@ router.get('/currentList', function(req, res, next) {
 });
 
 router.post('/list', function(req, res, next) {
-    if (req.body.hasOwnProperty('datas')) {
+    if (Object.prototype.hasOwnProperty.call(req.body, 'datas')) {
         var sessionsList = JSON.parse(req.body.datas);
 
         var promises = [];
