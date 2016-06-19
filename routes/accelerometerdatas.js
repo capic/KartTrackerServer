@@ -19,13 +19,15 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var accelerometerDatas = JSON.parse(JSON.stringify(req.body));
+    if (Object.prototype.hasOwnProperty.call(req.body, 'datas')) {
+        var accelerometerDatas = JSON.parse(req.body);
 
-    models.AccelerometerData.create(accelerometerDatas)
-        .then(function (ad) {
-                res.json(ad);
-            }
-        );
+        models.AccelerometerData.create(accelerometerDatas)
+            .then(function (ad) {
+                    res.json(ad);
+                }
+            );
+    }
 });
 
 module.exports = router;
