@@ -61,7 +61,7 @@ router.get('/currentList', function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var session = JSON.parse(JSON.stringify(req.body));
+    var session = JSON.parse(JSON.stringify(req.body.datas));
 
     models.Session.create(session)
         .then(function (s) {
