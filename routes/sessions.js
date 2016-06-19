@@ -61,13 +61,15 @@ router.get('/currentList', function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var session = JSON.parse(JSON.stringify(req.body.datas));
-    console.log(session);
-    models.Session.create(session)
-        .then(function (s) {
-                res.json(s);
-            }
-        );
+    if (Object.prototype.hasOwnProperty.call(req.body, 'datas')) {
+        var session = JSON.parse(req.body.datas);
+        console.log(session);
+        models.Session.create(session)
+            .then(function (s) {
+                    res.json(s);
+                }
+            );
+    }
 });
 
 router.post('/list', function(req, res, next) {
