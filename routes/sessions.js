@@ -60,6 +60,16 @@ router.get('/currentList', function(req, res, next) {
     );
 });
 
+router.post('/', function (req, res, next) {
+    var session = JSON.parse(JSON.stringify(req.body));
+
+    models.Session.create(session)
+        .then(function (s) {
+                res.json(s);
+            }
+        );
+});
+
 router.post('/list', function(req, res, next) {
     if (Object.prototype.hasOwnProperty.call(req.body, 'datas')) {
         var sessionsList = JSON.parse(req.body.datas);

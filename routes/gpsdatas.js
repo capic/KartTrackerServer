@@ -18,14 +18,24 @@ router.get('/', function (req, res, next) {
         );
 });
 
-router.get('/maxDistance', function(req,res){
-    models.GpsData.query("SELECT max(latitude) - min(latitude) as maxDistanceLatitude, " +
+router.post('/', function (req, res, next) {
+    var gpsDatas = JSON.parse(JSON.stringify(req.body));
+
+    models.GpsData.create(gpsDatas)
+        .then(function (gd) {
+                res.json(gd);
+            }
+        );
+});
+
+router.get('/maxMinCoordinates', function(req,res){
+    models.GpsData.query("SELECT max(latitude) as maxLatitude, min(latitude) as maxDistanceLatitude, " +
         "max(longitude) - min(longitude) as maxDistanceLongitude " +
         "from gps_data " +
         "where session_id = :sessionId",
-        {replacements: {sessionId: req.query.sessionId}, type: models.sequelize.QueryTypes.SELECT })
+        {replacements: {sessionId: req.query.session_id}, type: models.sequelize.QueryTypes.SELECT })
         .then(function(result) {
-            res.json(result.maxDistanceLatitude > result.maxDistanceLongitude ? result.maxDistanceLatitude : result.maxDistanceLongitude);
+            res.json({distance: result.maxDistanceLatitude > result.maxDistanceLongitude ? result.maxDistanceLatitude : result.maxDistanceLongitude});
     });
 });
 
