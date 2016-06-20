@@ -37,7 +37,7 @@ router.get('/maxMinCoordinates', function(req,res){
         "where session_id = :sessionId",
         {replacements: {sessionId: req.query.session_id}, type: models.sequelize.QueryTypes.SELECT })
         .then(function(result) {
-            res.json(result);
+            res.json(result[0]);
     });
 });
 
