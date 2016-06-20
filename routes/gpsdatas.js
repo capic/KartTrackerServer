@@ -31,7 +31,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.get('/maxMinCoordinates', function(req,res){
-    models.sequelize.query("SELECT max(latitude) as maxLatitude, min(latitude) as maxDistanceLatitude, " +
+    models.sequelize.query("SELECT max(latitude) as maxLatitude, min(latitude) as minLatitude, " +
         "max(longitude) as maxLongitude, min(longitude) as minLongitude " +
         "from gps_data " +
         "where session_id = :sessionId",
