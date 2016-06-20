@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     if (Object.prototype.hasOwnProperty.call(req.body, 'datas')) {
-        var gpsDatas = JSON.parse(req.body);
+        var gpsDatas = JSON.parse(req.body.datas);
         console.log(gpsDatas);
         models.GpsData.create(gpsDatas)
             .then(function (gd) {
