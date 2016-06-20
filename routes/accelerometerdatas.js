@@ -5,6 +5,7 @@ var utils = require('../common/utils');
 
 router.get('/', function (req, res, next) {
     var callback = function (action) {
+        console.log(action);
         res.json(action);
     };
 
