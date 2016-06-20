@@ -32,12 +32,12 @@ router.post('/', function (req, res, next) {
 
 router.get('/maxMinCoordinates', function(req,res){
     models.sequelize.query("SELECT max(latitude) as maxLatitude, min(latitude) as maxDistanceLatitude, " +
-        "max(longitude) - min(longitude) as maxDistanceLongitude " +
+        "max(longitude) as maxLongitude, min(longitude) as minLongitude " +
         "from gps_data " +
         "where session_id = :sessionId",
         {replacements: {sessionId: req.query.session_id}, type: models.sequelize.QueryTypes.SELECT })
         .then(function(result) {
-            res.json({distance: result.maxDistanceLatitude > result.maxDistanceLongitude ? result.maxDistanceLatitude : result.maxDistanceLongitude});
+            res.json(result);
     });
 });
 
