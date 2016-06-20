@@ -20,7 +20,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     if (Object.prototype.hasOwnProperty.call(req.body, 'datas')) {
-        var accelerometerDatas = JSON.parse(req.body);
+        var accelerometerDatas = JSON.parse(req.body).datas;
 
         models.AccelerometerData.create(accelerometerDatas)
             .then(function (ad) {
