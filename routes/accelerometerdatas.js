@@ -11,12 +11,22 @@ router.get('/', function (req, res, next) {
 
     var queryOptions = utils.urlFiltersParametersTreatment(req.query, []);
 
-    models.AccelerometerData.findAndCountAll(queryOptions).then(callback)
-        .catch(
-            function (errors) {
-                console.log(errors);
-            }
-        );
+    models.AccelerometerData.count(queryOptions.where).then(function(c) {
+        models.AccelerometerData.findAll(queryOptions).then(function(accelerometer) {
+            var ret = {};
+            ret.count = c;
+            ret.rows = accelerometer
+
+            res.json(ret);
+        })
+            .catch(
+                function (errors) {
+                    console.log(errors);
+                }
+            );
+    });
+
+
 });
 
 router.post('/', function (req, res, next) {
